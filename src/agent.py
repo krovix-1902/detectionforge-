@@ -51,7 +51,7 @@ load_dotenv()  # picks up GEMINI_API_KEY / GEMINI_MODEL from .env if present
 MAX_FIX_ATTEMPTS = 3
 
 
-def generate_with_backoff(client, max_retries: int = 6, **kwargs):
+def generate_with_backoff(client, max_retries: int = 12, **kwargs):
     """Call generate_content, waiting out free-tier rate limits (HTTP 429).
 
     The AI Studio free tier allows only a handful of requests per minute;
@@ -64,7 +64,7 @@ def generate_with_backoff(client, max_retries: int = 6, **kwargs):
         except Exception as e:
             msg = str(e)
             if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
-                wait = 40
+                wait = min(40 + 10 * (attempt - 1), 90)
                 print(f"  [rate limit] free-tier quota hit — waiting {wait}s "
                       f"(retry {attempt}/{max_retries})", flush=True)
                 time.sleep(wait)
