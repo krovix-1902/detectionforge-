@@ -1,0 +1,11 @@
+.env
+rule_memory.json
+# eval_results.png  # committed: embedded in README
+__pycache__/
+*.pyc
+enterprise-attack.json
+data/attack_index.npy
+data/attack_index.json
+.pytest_cache/
+.venv/
+venv/

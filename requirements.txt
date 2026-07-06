@@ -1,0 +1,32 @@
+# DetectionForge — dependencies (all open-source / OSI-approved, CC-BY 4.0 safe)
+# Core LLM SDK (Gemini via Google AI Studio)
+google-genai>=1.0.0
+
+# Structured output / validation
+pydantic>=2.0
+
+# Sigma rule validation + backend conversion
+pysigma>=0.11
+pysigma-backend-splunk>=1.0
+pysigma-backend-elasticsearch>=1.0   # gives Lucene/ES-QL; KQL-style output
+
+# Retrieval / embeddings for MITRE ATT&CK mapping
+sentence-transformers>=2.2           # local embeddings, no API cost
+numpy>=1.24
+
+# CTI fetching + parsing
+requests>=2.31
+beautifulsoup4>=4.12
+
+# Config
+python-dotenv>=1.0
+
+# Eval reporting
+pandas>=2.0
+matplotlib>=3.7
+
+# Gherkin spec parsing (Spec-Driven Development pillar)
+behave>=1.2.6
+
+# Tests
+pytest>=8.0

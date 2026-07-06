@@ -1,0 +1,23 @@
+[
+  {
+    "id": "tc01_phishing_macro_powershell",
+    "cti_text": "An adversary sent a spearphishing email with a malicious Word attachment. When opened, a VBA macro spawned powershell.exe with a base64-encoded command that downloaded a second-stage payload. Persistence was established via a Registry Run key.",
+    "expected_techniques": ["T1566.001", "T1059.001", "T1547.001"],
+    "should_match": ["winword.exe spawning powershell.exe with -enc flag"],
+    "should_not_match": ["an admin running a signed PowerShell maintenance script at logon"]
+  },
+  {
+    "id": "tc02_credential_dumping_lsass",
+    "cti_text": "The threat actor accessed LSASS memory using a renamed copy of a credential dumping tool to harvest plaintext credentials and NTLM hashes from the host.",
+    "expected_techniques": ["T1003.001"],
+    "should_match": ["non-standard process opening a handle to lsass.exe with read permissions"],
+    "should_not_match": ["antivirus or EDR legitimately reading lsass for scanning"]
+  },
+  {
+    "id": "tc03_scheduled_task_persistence",
+    "cti_text": "After initial access, the actor created a scheduled task that ran a payload from the public Temp directory every hour to maintain persistence.",
+    "expected_techniques": ["T1053.005"],
+    "should_match": ["schtasks.exe creating a task pointing at C:\\Users\\Public or \\Temp\\"],
+    "should_not_match": ["software installers creating legitimate update tasks in Program Files"]
+  }
+]
